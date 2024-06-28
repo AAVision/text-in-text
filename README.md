@@ -38,7 +38,7 @@ Global Flags:
 - Decoding:
 
 ```bash
-go run .\main.go encode --path "1234111.txt" --password "aavision"
+go run .\main.go decode --path "1234111.txt" --password "aavision"
 ```
 
 ```bash
