@@ -33,7 +33,7 @@ var encodeCmd = &cobra.Command{
 			if err != nil {
 				log.Fatal(err)
 			}
-			color.Cyan.Println("file written successfully.")
+			color.Cyan.Println("File written successfully!")
 		} else {
 
 		}
