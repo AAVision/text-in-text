@@ -14,7 +14,7 @@ var rootCmd = &cobra.Command{
 	Use:   "text-in-text",
 	Short: "Hide text inside a text.",
 	Long: `This tool was created to hide text inside a text using text-plain steganography. 
-The hidden secret text is protected by a password and using AES symmetric key.`,
+The hidden secret text is protected by a password.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
