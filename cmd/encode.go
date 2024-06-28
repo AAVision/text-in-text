@@ -6,6 +6,7 @@ package cmd
 import (
 	"log"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/AAVision/text-in-text/src"
@@ -28,8 +29,7 @@ var encodeCmd = &cobra.Command{
 			cipherSecret, _ := utils.Encrypt(hiddenText, password)
 			encodedText := src.Encode(coverText, []byte(cipherSecret))
 			color.Green.Println("Your text was added to file and you can share it with anyone!")
-			now := time.Now()
-			err := os.WriteFile(now.Format(time.RFC3339)+".txt", []byte(encodedText), 0777)
+			err := os.WriteFile(strconv.Itoa(int(time.Now().Unix()))+".txt", []byte(encodedText), 0777)
 			if err != nil {
 				log.Fatal(err)
 			}
