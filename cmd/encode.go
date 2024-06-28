@@ -4,6 +4,7 @@ Copyright © 2024 NAME HERE <AAVISION>
 package cmd
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -21,11 +22,13 @@ var encodeCmd = &cobra.Command{
 	Short: "Encode the hidden text in a normal text using password.",
 	Long:  `Encode the hidden text in a normal text using password.`,
 	Run: func(cmd *cobra.Command, args []string) {
+
 		coverText, _ := cmd.Flags().GetString("text")
 		hiddenText, _ := cmd.Flags().GetString("secret")
 		password, _ := cmd.Flags().GetString("password")
 
 		if coverText != "" && hiddenText != "" && password != "" {
+			now := time.Now()
 			cipherSecret, _ := utils.Encrypt(hiddenText, password)
 			encodedText := src.Encode(coverText, []byte(cipherSecret))
 			color.Green.Println("Your text was added to file and you can share it with anyone!")
@@ -34,8 +37,8 @@ var encodeCmd = &cobra.Command{
 				log.Fatal(err)
 			}
 			color.Cyan.Println("File written successfully!")
-		} else {
-
+			fmt.Print("Finished in: ")
+			color.BgHiGreen.Println(time.Since(now))
 		}
 	},
 }

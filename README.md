@@ -1,6 +1,6 @@
 # Text-to-Text :star:
 
-**Text to text is a CLI tool built using GO. The idea of that tool is to hide text inside text and use plaintext steganography.**
+**Text-to-text is a CLI tool built using GO. The idea behind that tool is to hide text inside text and use plaintext steganography.**
 
 
 <p align="center">
@@ -14,7 +14,7 @@
 
 ## Usage :rocket:
 
-The tool can encode and decode the texts and it takes the following attributes:
+The tool can encode and decode the texts, and it takes the following attributes:
 
 - Encoding:
 ```bash
@@ -33,7 +33,7 @@ Global Flags:
       --text string       An encoded text to extract secret from it!
 ```
 
-**The encoding will generate a file with a timestamp name and it contains the cover text encoded.**
+**The encoding will generate a file with a timestamp name, and it will contain the cover text encoded.**
 
 - Decoding:
 

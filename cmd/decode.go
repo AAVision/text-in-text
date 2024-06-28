@@ -4,8 +4,10 @@ Copyright © 2024 NAME HERE <AAVISION>
 package cmd
 
 import (
+	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"github.com/AAVision/text-in-text/src"
 	"github.com/AAVision/text-in-text/utils"
@@ -23,7 +25,7 @@ var decodeCmd = &cobra.Command{
 		path, _ := cmd.Flags().GetString("path")
 		password, _ := cmd.Flags().GetString("password")
 		if path != "" && password != "" {
-
+			now := time.Now()
 			data, err := os.ReadFile(path)
 			if err != nil {
 				log.Fatal(err)
@@ -36,6 +38,8 @@ var decodeCmd = &cobra.Command{
 			} else {
 				color.Green.Print("Secret: ")
 				color.Cyan.Println(output)
+				fmt.Print("Finished in: ")
+				color.BgHiGreen.Println(time.Since(now))
 			}
 		}
 
