@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	myFigure := figure.NewFigure("Text-To-Text", "larry3d", true)
+	myFigure := figure.NewFigure("Text-In-Text", "larry3d", true)
 	myFigure.Print()
 	fmt.Println()
 	cmd.Execute()
