@@ -1,6 +1,6 @@
-# Text-to-Text :star:
+# Text-in-Text :star:
 
-**Text-to-text is a CLI tool built using GO. The idea behind that tool is to hide text inside text and use plaintext steganography.**
+**Text-in-text is a CLI tool built using GO. The idea behind that tool is to hide text inside text and use plaintext steganography.**
 
 
 <p align="center">
