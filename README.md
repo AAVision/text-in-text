@@ -70,6 +70,12 @@ docker build -t text-in-text:latest .
 docker run text-in-text ...
 ```
 
+## Unit Testing :wrench:
+
+```bash
+go test
+```
+
 ## LICENSE :balance_scale:
 
 This project is licensed under the MIT License. See the [LICENSE](https://github.com/AAVision/text-to-text/blob/main/LICENSE) file for details.
