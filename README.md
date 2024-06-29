@@ -56,8 +56,18 @@ Global Flags:
 
 ## Build :whale:
 
+- Regular:
 ```bash
 go build
+```
+
+- Building the Docker Image:
+```bash
+docker build -t text-in-text:latest .
+```
+- Running the Docker Container:
+```bash
+docker run text-in-text ...
 ```
 
 ## LICENSE :balance_scale:
