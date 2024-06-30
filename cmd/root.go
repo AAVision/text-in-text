@@ -9,6 +9,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var (
+	password string
+)
+
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "text-in-text",
@@ -38,5 +42,7 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
+	rootCmd.PersistentFlags().StringVar(&password, "password", "", "A password to protect your text!")
 
+	rootCmd.MarkPersistentFlagRequired("password")
 }

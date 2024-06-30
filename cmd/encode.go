@@ -17,9 +17,8 @@ import (
 )
 
 var (
-	text     string
-	password string
-	secret   string
+	text   string
+	secret string
 )
 
 // encodeCmd represents the encode command
@@ -52,10 +51,8 @@ func init() {
 	rootCmd.AddCommand(encodeCmd)
 
 	encodeCmd.PersistentFlags().StringVar(&text, "text", "", "An encoded text to extract secret from it!")
-	encodeCmd.PersistentFlags().StringVar(&password, "password", "", "A password to protect your text!")
 	encodeCmd.PersistentFlags().StringVar(&secret, "secret", "", "A secret to be hidden!")
 
 	encodeCmd.MarkPersistentFlagRequired("text")
-	encodeCmd.MarkPersistentFlagRequired("password")
 	encodeCmd.MarkPersistentFlagRequired("secret")
 }

@@ -52,8 +52,6 @@ func init() {
 	rootCmd.AddCommand(decodeCmd)
 
 	decodeCmd.PersistentFlags().StringVar(&path, "path", "", "Path of file")
-	decodeCmd.PersistentFlags().StringVar(&password, "password", "", "A password to protect your text!")
 
 	decodeCmd.MarkPersistentFlagRequired("path")
-	decodeCmd.MarkPersistentFlagRequired("password")
 }
