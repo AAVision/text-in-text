@@ -48,5 +48,5 @@ var decodeCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(decodeCmd)
-	decodeCmd.Flags().String("path", "", "Path of file")
+	decodeCmd.Flags().String(PATH_FLAG, "", "Path of file")
 }

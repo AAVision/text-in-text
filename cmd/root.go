@@ -4,6 +4,7 @@ Copyright © 2024 NAME HERE <AAVISION>
 package cmd
 
 import (
+	"log"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -19,12 +20,6 @@ The hidden secret text is protected by a password.`,
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
 }
-
-var (
-	// Global flag variable
-	text     string
-	password string
-)
 
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
@@ -44,7 +39,11 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.PersistentFlags().StringVar(&text, "text", "", "An encoded text to extract secret from it!")
-	rootCmd.PersistentFlags().StringVar(&password, "password", "", "A password to protect your text!")
+	rootCmd.PersistentFlags().String(PASSWORD_FLAG, "", "A password to protect your text!")
+}
 
+func fatalOnErr(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
 }
