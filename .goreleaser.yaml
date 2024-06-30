@@ -23,6 +23,12 @@ builds:
       - windows
       - darwin
 
+release:
+  prerelease: auto
+
+universal_binaries:
+  - replace: true
+
 archives:
   - format: tar.gz
     # this name template makes the OS and Arch compatible with the results of `uname`.
