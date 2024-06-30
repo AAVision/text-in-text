@@ -97,6 +97,7 @@ var encodeCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(encodeCmd)
 	encodeCmd.Flags().String(SECRET_FLAG, "", "A secret to be hidden!")
+	encodeCmd.MarkFlagRequired(SECRET_FLAG)
 
 	encodeCmd.Flags().String(FILE_FLAG, "", "Path to file containing the input text")
 	encodeCmd.Flags().Bool(STDIN_FLAG, false, "Input text from stdin")

@@ -40,6 +40,7 @@ func init() {
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	rootCmd.PersistentFlags().String(PASSWORD_FLAG, "", "A password to protect your text!")
+	rootCmd.MarkPersistentFlagRequired(PASSWORD_FLAG)
 }
 
 func fatalOnErr(err error) {

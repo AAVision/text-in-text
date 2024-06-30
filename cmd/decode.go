@@ -24,29 +24,28 @@ var decodeCmd = &cobra.Command{
 
 		path, _ := cmd.Flags().GetString("path")
 		password, _ := cmd.Flags().GetString("password")
-		if path != "" && password != "" {
-			now := time.Now()
-			data, err := os.ReadFile(path)
-			if err != nil {
-				log.Fatal(err)
-			}
 
-			decodedText := src.Decode(string(data))
-			output, _ := utils.Decrypt(decodedText, password)
-			if output == "" {
-				color.Red.Println("Un-resolved secret 🙂")
-			} else {
-				color.Green.Print("Secret: ")
-				color.Cyan.Println(output)
-				fmt.Print("Finished in: ")
-				color.BgHiGreen.Println(time.Since(now))
-			}
+		now := time.Now()
+		data, err := os.ReadFile(path)
+		if err != nil {
+			log.Fatal(err)
 		}
 
+		decodedText := src.Decode(string(data))
+		output, _ := utils.Decrypt(decodedText, password)
+		if output == "" {
+			color.Red.Println("Un-resolved secret 🙂")
+		} else {
+			color.Green.Print("Secret: ")
+			color.Cyan.Println(output)
+			fmt.Print("Finished in: ")
+			color.BgHiGreen.Println(time.Since(now))
+		}
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(decodeCmd)
 	decodeCmd.Flags().String(PATH_FLAG, "", "Path of file")
+	decodeCmd.MarkFlagRequired(PATH_FLAG)
 }
