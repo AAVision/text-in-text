@@ -16,6 +16,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var (
+	text     string
+	password string
+	secret   string
+)
+
 // encodeCmd represents the encode command
 var encodeCmd = &cobra.Command{
 	Use:   "encode",
@@ -27,23 +33,29 @@ var encodeCmd = &cobra.Command{
 		hiddenText, _ := cmd.Flags().GetString("secret")
 		password, _ := cmd.Flags().GetString("password")
 
-		if coverText != "" && hiddenText != "" && password != "" {
-			now := time.Now()
-			cipherSecret, _ := utils.Encrypt(hiddenText, password)
-			encodedText := src.Encode(coverText, []byte(cipherSecret))
-			color.Green.Println("Your text was added to file and you can share it with anyone!")
-			err := os.WriteFile(strconv.Itoa(int(time.Now().Unix()))+".txt", []byte(encodedText), 0777)
-			if err != nil {
-				log.Fatal(err)
-			}
-			color.Cyan.Println("File written successfully!")
-			fmt.Print("Finished in: ")
-			color.BgHiGreen.Println(time.Since(now))
+		now := time.Now()
+		cipherSecret, _ := utils.Encrypt(hiddenText, password)
+		encodedText := src.Encode(coverText, []byte(cipherSecret))
+		color.Green.Println("Your text was added to file and you can share it with anyone!")
+		err := os.WriteFile(strconv.Itoa(int(time.Now().Unix()))+".txt", []byte(encodedText), 0777)
+		if err != nil {
+			log.Fatal(err)
 		}
+		color.Cyan.Println("File written successfully!")
+		fmt.Print("Finished in: ")
+		color.BgHiGreen.Println(time.Since(now))
+
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(encodeCmd)
-	encodeCmd.Flags().String("secret", "", "A secret to be hidden!")
+
+	encodeCmd.PersistentFlags().StringVar(&text, "text", "", "An encoded text to extract secret from it!")
+	encodeCmd.PersistentFlags().StringVar(&password, "password", "", "A password to protect your text!")
+	encodeCmd.PersistentFlags().StringVar(&secret, "secret", "", "A secret to be hidden!")
+
+	encodeCmd.MarkPersistentFlagRequired("text")
+	encodeCmd.MarkPersistentFlagRequired("password")
+	encodeCmd.MarkPersistentFlagRequired("secret")
 }
