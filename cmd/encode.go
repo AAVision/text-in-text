@@ -13,6 +13,7 @@ import (
 	"github.com/AAVision/text-in-text/src"
 	"github.com/AAVision/text-in-text/utils"
 	"github.com/gookit/color"
+	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/spf13/cobra"
 )
 
@@ -85,12 +86,20 @@ var encodeCmd = &cobra.Command{
 		now := time.Now()
 		cipherSecret, _ := utils.Encrypt(hiddenText, password)
 		encodedText := src.Encode(text, []byte(cipherSecret))
-		color.Green.Println("Your text was added to file and you can share it with anyone!")
-		err = os.WriteFile(strconv.Itoa(int(now.Unix()))+".txt", []byte(encodedText), 0777)
+		fileName := strconv.Itoa(int(now.Unix())) + ".txt"
+		err = os.WriteFile(fileName, []byte(encodedText), 0777)
 		fatalOnErr(err)
-		color.Cyan.Println("File written successfully!")
-		fmt.Print("Finished in: ")
-		color.BgHiGreen.Println(time.Since(now))
+
+		color.Green.Println("Your text was added to file and you can share it with anyone!")
+		color.Cyan.Println("File was written successfully!")
+
+		t := table.NewWriter()
+		rowHeader := table.Row{"#", "FileName", "Text", "Finished in:"}
+
+		row := table.Row{"-", fileName, text, color.BgCyan.Sprintf("%s", time.Since(now))}
+		t.AppendRows([]table.Row{row})
+		t.AppendHeader(rowHeader)
+		fmt.Println(t.Render())
 	},
 }
 

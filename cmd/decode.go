@@ -12,6 +12,7 @@ import (
 	"github.com/AAVision/text-in-text/src"
 	"github.com/AAVision/text-in-text/utils"
 	"github.com/gookit/color"
+	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/spf13/cobra"
 )
 
@@ -33,14 +34,21 @@ var decodeCmd = &cobra.Command{
 
 		decodedText := src.Decode(string(data))
 		output, _ := utils.Decrypt(decodedText, password)
+
+		t := table.NewWriter()
+		rowHeader := table.Row{"#", "Path", "Secret", "Finished in:"}
+
 		if output == "" {
-			color.Red.Println("Un-resolved secret 🙂")
+			output = color.BgHiRed.Sprintf("Un-resolved secret 🙂  ")
 		} else {
-			color.Green.Print("Secret: ")
-			color.Cyan.Println(output)
-			fmt.Print("Finished in: ")
-			color.BgHiGreen.Println(time.Since(now))
+			output = color.BgHiGreen.Sprintf(output)
 		}
+
+		row := table.Row{"-", path, output, color.BgCyan.Sprintf("%s", time.Since(now))}
+		t.AppendRows([]table.Row{row})
+		t.AppendHeader(rowHeader)
+		fmt.Println(t.Render())
+
 	},
 }
 
