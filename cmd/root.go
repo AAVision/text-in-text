@@ -4,13 +4,10 @@ Copyright © 2024 NAME HERE <AAVISION>
 package cmd
 
 import (
+	"log"
 	"os"
 
 	"github.com/spf13/cobra"
-)
-
-var (
-	password string
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -42,7 +39,12 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.PersistentFlags().StringVar(&password, "password", "", "A password to protect your text!")
+	rootCmd.PersistentFlags().String(PASSWORD_FLAG, "", "A password to protect your text!")
+	rootCmd.MarkPersistentFlagRequired(PASSWORD_FLAG)
+}
 
-	rootCmd.MarkPersistentFlagRequired("password")
+func fatalOnErr(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
 }

@@ -15,10 +15,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var (
-	path string
-)
-
 // decodeCmd represents the decode command
 var decodeCmd = &cobra.Command{
 	Use:   "decode",
@@ -50,8 +46,6 @@ var decodeCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(decodeCmd)
-
-	decodeCmd.PersistentFlags().StringVar(&path, "path", "", "Path of file")
-
-	decodeCmd.MarkPersistentFlagRequired("path")
+	decodeCmd.Flags().String(PATH_FLAG, "", "Path of file")
+	decodeCmd.MarkFlagRequired(PATH_FLAG)
 }
